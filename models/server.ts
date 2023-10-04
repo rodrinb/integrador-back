@@ -3,6 +3,7 @@ import { conectarBD } from "../database/config";
 import usuariosRoutes from "../routes/usuarios";
 import productosRoutes from "../routes/productos";
 const cors = require("cors");
+const allowedOrigins = ["*", "https://integrador-front.vercel.app/"];
 export class Server {
   app: Express;
 
@@ -13,12 +14,7 @@ export class Server {
     this.connectBD();
     this.app.use(
       cors({
-        origin: [
-          "*",
-          "https://agutierrez.site",
-          "https://agutierrez.site/",
-          "agutierrez.site",
-        ],
+        origin: allowedOrigins,
       })
     );
   }
@@ -33,16 +29,10 @@ export class Server {
 
   routes(): void {
     this.app.use("/usuarios", usuariosRoutes);
+    this.app.options("*", cors({ origin: allowedOrigins }));
     this.app.use(
       "/productos",
-      cors({
-        origin: [
-          "*",
-          "https://agutierrez.site",
-          "https://agutierrez.site/",
-          "agutierrez.site",
-        ],
-      }),
+      cors({ origin: allowedOrigins }),
       productosRoutes
     );
   }
