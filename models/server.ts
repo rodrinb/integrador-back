@@ -1,8 +1,8 @@
 import express, { Express } from "express";
 import { conectarBD } from "../database/config";
 import usuariosRoutes from "../routes/usuarios";
-const cors = require("cors")
-
+const cors = require("cors");
+const PORT = process.env.PORT;
 export class Server {
   app: Express;
 
@@ -26,7 +26,7 @@ export class Server {
     this.app.use("/usuarios", usuariosRoutes);
   }
   listen(): void {
-    this.app.listen(8080, () => {
+    this.app.listen(PORT, () => {
       console.log("Levantadoo");
     });
   }
