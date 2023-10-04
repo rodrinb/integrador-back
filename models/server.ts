@@ -25,14 +25,13 @@ export class Server {
 
   middlewares(): void {
     this.app.use(express.json());
+    this.app.options("*", cors({ origin: allowedOrigins }));
   }
 
   routes(): void {
     this.app.use("/usuarios", usuariosRoutes);
-    this.app.options("*", cors({ origin: allowedOrigins }));
     this.app.use(
       "/productos",
-      cors({ origin: allowedOrigins }),
       productosRoutes
     );
   }
