@@ -26,4 +26,5 @@ export const registrarUsuario = async (req: Request, res: Response) => {
 
 export const test = async (req: Request, res: Response) => {
   console.log("Hola");
+res.send("Respuesta!");
 };
