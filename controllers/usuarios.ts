@@ -4,15 +4,6 @@ import { createUser, getUsersByEmail, getUsers } from "../models/usuario";
 import axios from "axios";
 
 export const registrarUsuario = async (req: Request, res: Response) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-Requested-With,content-type"
-  );
   if (req.body.fullname && req.body.email && req.body.password) {
     const emails = await getUsersByEmail(req.body.email);
     if (emails) {
