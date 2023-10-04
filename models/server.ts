@@ -11,7 +11,7 @@ export class Server {
     this.middlewares();
     this.routes();
     this.connectBD();
-    this.app.use(cors({ origin: "*" }));
+    this.app.use(cors({ origin: ["*, https://agutierrez.site"] }));
   }
 
   async connectBD(): Promise<void> {
