@@ -24,7 +24,8 @@ const schema = new mongoose.Schema<IUsuario>({
 export const UserModel = mongoose.model("User", schema);
 
 export const getUsers = () => UserModel.find();
-export const getUsersByEmail = (email: String) => UserModel.findOne({ email });
+export const getUsersByEmail = async (email: String) =>
+  UserModel.findOne({ email });
 
 export const createUser = async (user: IUsuario) => {
   const us = await new UserModel(user).save();
