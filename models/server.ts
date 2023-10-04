@@ -26,7 +26,8 @@ export class Server {
     this.app.use("/usuarios", usuariosRoutes);
   }
   listen(): void {
-    this.app.listen(PORT, () => {
+    this.app.listen(8888, () => {
+
       console.log("Levantadoo");
     });
   }
