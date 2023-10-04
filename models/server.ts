@@ -1,7 +1,6 @@
 import express, { Express } from "express";
 import { conectarBD } from "../database/config";
 import usuariosRoutes from "../routes/usuarios";
-const cors = require("cors");
 const PORT = process.env.PORT;
 export class Server {
   app: Express;
@@ -11,7 +10,6 @@ export class Server {
     this.middlewares();
     this.routes();
     this.connectBD();
-    this.app.use(cors());
   }
 
   async connectBD(): Promise<void> {
@@ -27,7 +25,6 @@ export class Server {
   }
   listen(): void {
     this.app.listen(8888, () => {
-
       console.log("Levantadoo");
     });
   }
