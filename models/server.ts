@@ -2,6 +2,7 @@ import express, { Express } from "express";
 import { conectarBD } from "../database/config";
 import usuariosRoutes from "../routes/usuarios";
 import productosRoutes from "../routes/productos";
+const cors = require("cors");
 export class Server {
   app: Express;
 
@@ -10,6 +11,7 @@ export class Server {
     this.middlewares();
     this.routes();
     this.connectBD();
+    this.app.use(cors({ origin: "*" }));
   }
 
   async connectBD(): Promise<void> {
