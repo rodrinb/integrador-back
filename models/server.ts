@@ -12,11 +12,7 @@ export class Server {
     this.middlewares();
     this.routes();
     this.connectBD();
-    this.app.use(
-      cors({
-        origin: allowedOrigins,
-      })
-    );
+    this.app.use(cors());
   }
 
   async connectBD(): Promise<void> {
@@ -25,15 +21,12 @@ export class Server {
 
   middlewares(): void {
     this.app.use(express.json());
-    this.app.options("*", cors({ origin: allowedOrigins }));
+    this.app.options("/usuarios", cors());
   }
 
   routes(): void {
-    this.app.use("/usuarios", usuariosRoutes);
-    this.app.use(
-      "/productos",
-      productosRoutes
-    );
+    this.app.use("/usuarios", cors(), usuariosRoutes);
+    this.app.use("/productos", cors(), productosRoutes);
   }
   listen(): void {
     this.app.listen(4001, () => {
