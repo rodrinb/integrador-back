@@ -1,7 +1,7 @@
 import express, { Express } from "express";
 import { conectarBD } from "../database/config";
 import usuariosRoutes from "../routes/usuarios";
-const PORT = process.env.PORT;
+import productosRoutes from "../routes/productos";
 export class Server {
   app: Express;
 
@@ -22,6 +22,7 @@ export class Server {
 
   routes(): void {
     this.app.use("/usuarios", usuariosRoutes);
+    this.app.use("/productos", productosRoutes);
   }
   listen(): void {
     this.app.listen(8888, () => {

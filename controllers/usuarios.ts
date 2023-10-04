@@ -1,6 +1,6 @@
 //const express = require("express");
 import { Request, Response } from "express";
-import { createUser, getUsersByEmail } from "../models/usuario";
+import { createUser, getUsersByEmail, getUsers } from "../models/usuario";
 import axios from "axios";
 
 export const registrarUsuario = async (req: Request, res: Response) => {
@@ -8,23 +8,26 @@ export const registrarUsuario = async (req: Request, res: Response) => {
     const emails = await getUsersByEmail(req.body.email);
     if (emails) {
       res.send("Este correo ya existe");
-    }else{
-        const response = await createUser(req.body);
-        if (response) {
-          let resp = {
-            fullname: response.fullname,
-            email: response.email,
-            status: 200,
-          };
-          res.send(resp);
-        }
+    } else {
+      const response = await createUser(req.body);
+      if (response) {
+        let resp = {
+          fullname: response.fullname,
+          email: response.email,
+          status: 200,
+        };
+        res.send(resp);
+      }
     }
   } else {
     res.send("Faltan datos");
   }
 };
-
+export const getUsuarios = async (req: Request, res: Response) => {
+  const response = await getUsers();
+  res.send(response);
+};
 export const test = async (req: Request, res: Response) => {
   console.log("Hola");
-res.send("Respuesta!");
+  res.send("Respuesta!");
 };

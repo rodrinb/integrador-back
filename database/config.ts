@@ -1,4 +1,3 @@
-import { log } from "console";
 import mongoose from "mongoose";
 
 export const conectarBD = async (): Promise<void> => {
