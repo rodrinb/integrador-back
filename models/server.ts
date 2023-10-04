@@ -13,7 +13,12 @@ export class Server {
     this.connectBD();
     this.app.use(
       cors({
-        origin: "*",
+        origin: [
+          "*",
+          "https://agutierrez.site",
+          "https://agutierrez.site/",
+          "agutierrez.site",
+        ],
       })
     );
   }
@@ -28,7 +33,18 @@ export class Server {
 
   routes(): void {
     this.app.use("/usuarios", usuariosRoutes);
-    this.app.use("/productos", productosRoutes);
+    this.app.use(
+      "/productos",
+      cors({
+        origin: [
+          "*",
+          "https://agutierrez.site",
+          "https://agutierrez.site/",
+          "agutierrez.site",
+        ],
+      }),
+      productosRoutes
+    );
   }
   listen(): void {
     this.app.listen(4001, () => {
