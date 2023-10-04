@@ -25,7 +25,7 @@ export class Server {
     this.app.use("/productos", productosRoutes);
   }
   listen(): void {
-    this.app.listen(8888, () => {
+    this.app.listen(4000, () => {
       console.log("Levantadoo");
     });
   }
