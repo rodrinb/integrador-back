@@ -20,20 +20,6 @@ export class Server {
 
   middlewares(): void {
     this.app.use(express.json());
-    this.app.use(function (req, res, next) {
-      res.setHeader("Access-Control-Allow-Origin", "https://agutierrez.site");
-      res.setHeader(
-        "Access-Control-Allow-Methods",
-        "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-      );
-      res.setHeader(
-        "Access-Control-Allow-Headers",
-        "X-Requested-With,content-type"
-      );
-
-      // Pass to next layer of middleware
-      next();
-    });
   }
 
   routes(): void {
