@@ -36,10 +36,10 @@ export const ProductModel = mongoose.model("Product", schema);
 export const getProducts = () => ProductModel.find();
 
 export const getProductsById = async (id: String) => {
-  ProductModel.findOne({ id });
+  ProductModel.findOne({ _id: id });
 };
 
-export const createProduct = async (product: IProducto) => {
+export const createProducto = async (product: IProducto) => {
   const prod = await new ProductModel(product).save();
   return prod.toObject();
 };
