@@ -1,26 +1,46 @@
 //const express = require("express");
 import { Request, Response } from "express";
 import { createUser, getUsersByEmail, getUsers } from "../models/usuario";
-import axios from "axios";
 
 export const registrarUsuario = async (req: Request, res: Response) => {
   if (req.body.fullname && req.body.email && req.body.password) {
     const emails = await getUsersByEmail(req.body.email);
     if (emails) {
-      res.send("Este correo ya existe");
+      res.send({ message: "Este correo ya existe", status: 400 });
     } else {
       const response = await createUser(req.body);
       if (response) {
         let resp = {
           fullname: response.fullname,
           email: response.email,
+          message: "Usuario registrado correctamente",
           status: 200,
         };
         res.send(resp);
       }
     }
   } else {
-    res.send("Faltan datos");
+    res.send({ message: "Faltan datos", status: 400 });
+  }
+};
+
+export const loguearUsuario = async (req: Request, res: Response) => {
+  if (req.body.email && req.body.password) {
+    const userLoggin = await getUsersByEmail(req.body.email);
+
+    if (!userLoggin) {
+      return res.send({ message: "Usuario inexistente", status: 400 });
+    }
+    if (userLoggin?.password !== req.body.password) {
+      return res.send({ message: "Email/Password no coinciden", status: 400 });
+    }
+    let resp = {
+      fullname: userLoggin.fullname,
+      email: userLoggin.email,
+      message: "Usuario logueado correctamente",
+      status: 200,
+    };
+    return res.send(resp);
   }
 };
 export const getUsuarios = async (req: Request, res: Response) => {
