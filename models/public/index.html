@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Endpoints</title>
+  </head>
+  <body>
+    <h1>Productos</h1>
+    <p><b>[GET] /productos/: </b>Trae todos los productos</p>
+    <p>
+      <b>[POST] /productos/crearProducto:</b> Crea el producto que pide la
+      siguiente estructura
+    </p>
+    <ul>
+      <li>id: Number</li>
+      <li>title: String</li>
+      <li>image(Base64): String</li>
+      <li>price: Number</li>
+      <li>description: String</li>
+      <li>category: String (A, B o C)</li>
+    </ul>
+
+    <p>
+      <b>[GET] /productos/:id : </b>Trae el producto segun el _id (generado por
+      MongoDB)
+    </p>
+    <h1>Usuarios</h1>
+    <p><b>[GET] /usuarios/: </b>Trae a todos los usuarios</p>
+    <p>
+      <b>[POST] /usuarios/registrar: </b>Crea el usuario que pide la siguiente
+      estructura
+    </p>
+    <ul>
+      <li>fullname: String</li>
+      <li>email: String</li>
+      <li>password: String</li>
+    </ul>
+
+    <p>
+      <b>[POST] /usuarios/login: </b>Inicia sesion del usuario, pide la
+      siguiente estructura
+    </p>
+    <ul>
+      <li>email: String</li>
+      <li>password: String</li>
+    </ul>
+    <p>
+      <b>[GET] /usuarios/:id : </b>Trae el usuario segun el _id (generado por
+      MongoDB)
+    </p>
+  </body>
+</html>

@@ -1,6 +1,11 @@
 //const express = require("express");
 import { Request, Response } from "express";
-import { createUser, getUsersByEmail, getUsers } from "../models/usuario";
+import {
+  createUser,
+  getUsersByEmail,
+  getUsers,
+  getUserById,
+} from "../models/usuario";
 
 export const registrarUsuario = async (req: Request, res: Response) => {
   if (req.body.fullname && req.body.email && req.body.password) {
@@ -47,7 +52,12 @@ export const getUsuarios = async (req: Request, res: Response) => {
   const response = await getUsers();
   res.send(response);
 };
-export const test = async (req: Request, res: Response) => {
-  console.log("Hola");
-  res.send("Respuesta!");
+export const getUsuarioById = async (req: Request, res: Response) => {
+  const id = req.params.id;
+  console.log(id);
+
+  const response = await getUserById(id);
+  console.log(response);
+
+  res.send(response);
 };

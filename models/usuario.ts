@@ -31,3 +31,10 @@ export const createUser = async (user: IUsuario) => {
   const us = await new UserModel(user).save();
   return us.toObject();
 };
+export const getUserById = async (id: String) => {
+  const response = await UserModel.findById(id).exec();
+
+  if (response) {
+    return response;
+  }
+};

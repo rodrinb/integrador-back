@@ -1,4 +1,5 @@
 import express, { Express } from "express";
+import path from "path";
 import { conectarBD } from "../database/config";
 import usuariosRoutes from "../routes/usuarios";
 import productosRoutes from "../routes/productos";
@@ -13,6 +14,7 @@ export class Server {
     this.routes();
     this.connectBD();
     this.app.use(cors());
+    this.app.use(express.static(path.join(__dirname, "public")));
   }
 
   async connectBD(): Promise<void> {
@@ -25,6 +27,9 @@ export class Server {
   }
 
   routes(): void {
+    this.app.get("/", (req, res) => {
+      res.sendFile(path.join(__dirname, "public", "index.html"));
+    });
     this.app.use("/usuarios", cors(), usuariosRoutes);
     this.app.use("/productos", cors(), productosRoutes);
   }

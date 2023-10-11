@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
-
+const { ObjectId } = require("mongoose").Types;
 export interface IProducto {
-  id: Number;
   title: String;
   image: String;
   description: String;
@@ -9,10 +8,6 @@ export interface IProducto {
 }
 
 const schema = new mongoose.Schema<IProducto>({
-  id: {
-    type: Number,
-    required: true,
-  },
   title: {
     type: String,
     required: true,
@@ -36,7 +31,11 @@ export const ProductModel = mongoose.model("Product", schema);
 export const getProducts = () => ProductModel.find();
 
 export const getProductsById = async (id: String) => {
-  ProductModel.findOne({ _id: id });
+  const response = await ProductModel.findById(id).exec();
+
+  if (response) {
+    return response;
+  }
 };
 
 export const createProducto = async (product: IProducto) => {
